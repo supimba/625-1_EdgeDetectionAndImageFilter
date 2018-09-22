@@ -45,13 +45,13 @@ namespace ImageEdgeDetection
                 previewBitmap = originalBitmap.CopyToSquareCanvas(picPreview.Width);
                 picPreview.Image = previewBitmap;
 
-                ApplyFilter(true);
+                ApplyEdgeDetection(true);
             }
         }
 
         private void btnSaveNewImage_Click(object sender, EventArgs e)
         {
-            ApplyFilter(false);
+            ApplyEdgeDetection(false);
 
             if (resultBitmap != null)
             {
@@ -84,7 +84,7 @@ namespace ImageEdgeDetection
             }
         }
 
-        private void ApplyFilter(bool preview)
+        private void ApplyEdgeDetection(bool preview)
         {
             if (previewBitmap == null || cmbEdgeDetection.SelectedIndex == -1)
             {
@@ -192,9 +192,64 @@ namespace ImageEdgeDetection
             }
         }
 
-        private void NeighbourCountValueChangedEventHandler(object sender, EventArgs e)
+        private void ApplyImageFilter(bool preview)
         {
-            ApplyFilter(true);
+            if (previewBitmap == null || cmbEdgeDetection.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            Bitmap selectedSource = null;
+            Bitmap bitmapResult = null;
+
+            if (preview == true)
+            {
+                selectedSource = previewBitmap;
+            }
+            else
+            {
+                selectedSource = originalBitmap;
+            }
+
+            if (selectedSource != null)
+            {
+                switch (cmbFilters.SelectedItem.ToString())
+                {
+                    // ne somme pas les filtres + edge detect.
+                    case "None":
+                        bitmapResult = selectedSource;
+                        break;
+                    case "Rainbow":
+                        bitmapResult = ImageFilters.RainbowFilter(new Bitmap(selectedSource));
+                        break;
+                }
+
+            }
+
+            if (bitmapResult != null)
+            {
+                if (preview == true)
+                {
+                    picPreview.Image = bitmapResult;
+                }
+                else
+                {
+                    resultBitmap = bitmapResult;
+                }
+            }
+
+        }
+
+            // modified
+            private void CmbEdgeDetectionSelectedItemEventHandler(object sender, EventArgs e)
+        {          
+            ApplyEdgeDetection(true);
+        }
+
+        private void CmbFiltersSelectedItemEventHandler(object sender, EventArgs e)
+        {
+            // si cmbDetection = None, on ne peut pas appliquer la méthode
+            ApplyImageFilter(true);
         }
     }
 }

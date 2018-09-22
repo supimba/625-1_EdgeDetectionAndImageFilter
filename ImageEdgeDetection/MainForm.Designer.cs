@@ -99,7 +99,7 @@
             this.cmbEdgeDetection.Name = "cmbEdgeDetection";
             this.cmbEdgeDetection.Size = new System.Drawing.Size(288, 32);
             this.cmbEdgeDetection.TabIndex = 20;
-            this.cmbEdgeDetection.SelectedIndexChanged += new System.EventHandler(this.NeighbourCountValueChangedEventHandler);
+            this.cmbEdgeDetection.SelectedIndexChanged += new System.EventHandler(this.CmbEdgeDetectionSelectedItemEventHandler);
             // 
             // cmbFilters
             // 
@@ -108,13 +108,13 @@
             this.cmbFilters.FormattingEnabled = true;
             this.cmbFilters.Items.AddRange(new object[] {
             "None",
-            "Magic mosaic",
+            "Rainbow",
             "Black & white"});
             this.cmbFilters.Location = new System.Drawing.Point(168, 665);
             this.cmbFilters.Name = "cmbFilters";
-            this.cmbFilters.Size = new System.Drawing.Size(288, 37);
+            this.cmbFilters.Size = new System.Drawing.Size(288, 32);
             this.cmbFilters.TabIndex = 20;
-            this.cmbFilters.SelectedIndexChanged += new System.EventHandler(this.NeighbourCountValueChangedEventHandler);
+            this.cmbFilters.SelectedIndexChanged += new System.EventHandler(this.CmbFiltersSelectedItemEventHandler);
             // 
             // MainForm
             // 
