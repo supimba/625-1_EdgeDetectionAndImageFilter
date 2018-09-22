@@ -32,6 +32,7 @@
             this.btnOpenOriginal = new System.Windows.Forms.Button();
             this.btnSaveNewImage = new System.Windows.Forms.Button();
             this.cmbEdgeDetection = new System.Windows.Forms.ComboBox();
+            this.cmbFilters = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,11 +101,28 @@
             this.cmbEdgeDetection.TabIndex = 20;
             this.cmbEdgeDetection.SelectedIndexChanged += new System.EventHandler(this.NeighbourCountValueChangedEventHandler);
             // 
+            // cmbFilters
+            // 
+            this.cmbFilters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbFilters.FormattingEnabled = true;
+            this.cmbFilters.Items.AddRange(new object[] {
+            "None",
+            "Magic mosaic",
+            "Black & white"});
+            this.cmbFilters.Location = new System.Drawing.Point(168, 665);
+            this.cmbFilters.Name = "cmbFilters";
+            this.cmbFilters.Size = new System.Drawing.Size(288, 37);
+            this.cmbFilters.TabIndex = 20;
+            this.cmbFilters.SelectedIndexChanged += new System.EventHandler(this.NeighbourCountValueChangedEventHandler);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(624, 675);
+            //this.ClientSize = new System.Drawing.Size(624, 675);
+            this.ClientSize = new System.Drawing.Size(624, 707);
             this.Controls.Add(this.cmbEdgeDetection);
+            this.Controls.Add(this.cmbFilters);
             this.Controls.Add(this.btnSaveNewImage);
             this.Controls.Add(this.btnOpenOriginal);
             this.Controls.Add(this.picPreview);
@@ -125,6 +143,9 @@
         private System.Windows.Forms.Button btnOpenOriginal;
         private System.Windows.Forms.Button btnSaveNewImage;
         private System.Windows.Forms.ComboBox cmbEdgeDetection;
+        /* added combo box to choose filter
+         * */
+        private System.Windows.Forms.ComboBox cmbFilters;
     }
 }
 
