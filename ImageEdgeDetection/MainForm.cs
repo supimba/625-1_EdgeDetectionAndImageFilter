@@ -21,6 +21,9 @@ namespace ImageEdgeDetection
         private Bitmap originalBitmap = null;
         private Bitmap previewBitmap = null;
         private Bitmap resultBitmap = null;
+        private Bitmap selectedSource = null;
+        private Bitmap bitmapResult = null;
+        private bool imageFilter;
         
         public MainForm()
         {
@@ -51,7 +54,10 @@ namespace ImageEdgeDetection
 
         private void btnSaveNewImage_Click(object sender, EventArgs e)
         {
-            ApplyEdgeDetection(false);
+            if (imageFilter == true)
+                ApplyImageFilter(false);
+
+                ApplyEdgeDetection(false);
 
             if (resultBitmap != null)
             {
@@ -89,18 +95,21 @@ namespace ImageEdgeDetection
             if (previewBitmap == null || cmbEdgeDetection.SelectedIndex == -1)
             {
                 return;
-            }
-
-            Bitmap selectedSource = null;
-            Bitmap bitmapResult = null;
+            }              
 
             if (preview == true)
             {
-                selectedSource = previewBitmap;
+                if (imageFilter == true)
+                    selectedSource = bitmapResult;
+                else
+                    selectedSource = previewBitmap;
             }
             else
             {
-                selectedSource = originalBitmap;
+                if (imageFilter == true)
+                    selectedSource = bitmapResult;
+                else
+                    selectedSource = originalBitmap;
             }
 
             if (selectedSource != null)
@@ -199,9 +208,6 @@ namespace ImageEdgeDetection
                 return;
             }
 
-            Bitmap selectedSource = null;
-            Bitmap bitmapResult = null;
-
             if (preview == true)
             {
                 selectedSource = previewBitmap;
@@ -218,9 +224,15 @@ namespace ImageEdgeDetection
                     // ne somme pas les filtres + edge detect.
                     case "None":
                         bitmapResult = selectedSource;
+                        imageFilter = false;
                         break;
                     case "Rainbow":
                         bitmapResult = ImageFilters.RainbowFilter(new Bitmap(selectedSource));
+                        imageFilter = true;
+                        break;
+                    case "Black & white":
+                        bitmapResult = ImageFilters.BlackWhite(new Bitmap(selectedSource));
+                        imageFilter = true;
                         break;
                 }
 
