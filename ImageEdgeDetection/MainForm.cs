@@ -253,8 +253,16 @@ namespace ImageEdgeDetection
         }
 
             // modified
-            private void CmbEdgeDetectionSelectedItemEventHandler(object sender, EventArgs e)
-        {          
+        private void CmbEdgeDetectionSelectedItemEventHandler(object sender, EventArgs e)
+        {
+            if (cmbEdgeDetection.SelectedItem.ToString() != "None")
+            {
+                cmbFilters.Enabled = false;
+            }
+            else
+            {
+                cmbFilters.Enabled = true; 
+            }
             ApplyEdgeDetection(true);
         }
 
