@@ -95,7 +95,7 @@
             "Prewitt Grayscale",
             "Kirsch",
             "Kirsch Grayscale"});
-            this.cmbEdgeDetection.Location = new System.Drawing.Point(168, 627);
+            this.cmbEdgeDetection.Location = new System.Drawing.Point(168, 665);
             this.cmbEdgeDetection.Name = "cmbEdgeDetection";
             this.cmbEdgeDetection.Size = new System.Drawing.Size(288, 32);
             this.cmbEdgeDetection.TabIndex = 20;
@@ -110,7 +110,8 @@
             "None",
             "Rainbow",
             "Black & white"});
-            this.cmbFilters.Location = new System.Drawing.Point(168, 665);
+            this.cmbFilters.SelectedIndex = 0;
+            this.cmbFilters.Location = new System.Drawing.Point(168, 627);
             this.cmbFilters.Name = "cmbFilters";
             this.cmbFilters.Size = new System.Drawing.Size(288, 32);
             this.cmbFilters.TabIndex = 20;
