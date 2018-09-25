@@ -16,15 +16,24 @@ using System.Drawing.Imaging;
 
 namespace ImageEdgeDetection
 {
+    /// <summary>
+    /// The Mainform to manage user interaction 
+    /// </summary>
     public partial class MainForm : Form
     {
+        // originalBitmap image load by the user
         private Bitmap originalBitmap = null;
+        // previewBitmap show in the main form
         private Bitmap previewBitmap = null;
+        // resultBitmap image after applying a filter
         private Bitmap resultBitmap = null;
+        // the selectedSource is use like a temporary image before the save
         private Bitmap selectedSource = null;
+        // bitmapResult is the image that will be save
         private Bitmap bitmapResult = null;
+        // used to know if the image has been already filter
         private bool imageFilter;
-        
+
         public MainForm()
         {
             InitializeComponent();
@@ -57,7 +66,7 @@ namespace ImageEdgeDetection
             if (imageFilter == true)
                 ApplyImageFilter(false);
 
-                ApplyEdgeDetection(false);
+            ApplyEdgeDetection(false);
 
             if (resultBitmap != null)
             {
@@ -89,13 +98,13 @@ namespace ImageEdgeDetection
                 }
             }
         }
-
+        // apply an edge filter
         private void ApplyEdgeDetection(bool preview)
         {
             if (previewBitmap == null || cmbEdgeDetection.SelectedIndex == -1)
             {
                 return;
-            }              
+            }
 
             if (preview == true)
             {
@@ -200,7 +209,7 @@ namespace ImageEdgeDetection
                 }
             }
         }
-
+        // apply an image filter
         private void ApplyImageFilter(bool preview)
         {
             if (previewBitmap == null || cmbEdgeDetection.SelectedIndex == -1)
@@ -252,7 +261,7 @@ namespace ImageEdgeDetection
 
         }
 
-            // modified
+        // event endler to apply the selected edge filter
         private void CmbEdgeDetectionSelectedItemEventHandler(object sender, EventArgs e)
         {
             if (cmbEdgeDetection.SelectedItem.ToString() != "None")
@@ -261,14 +270,14 @@ namespace ImageEdgeDetection
             }
             else
             {
-                cmbFilters.Enabled = true; 
+                cmbFilters.Enabled = true;
             }
             ApplyEdgeDetection(true);
         }
 
         private void CmbFiltersSelectedItemEventHandler(object sender, EventArgs e)
         {
-            // si cmbDetection = None, on ne peut pas appliquer la méthode
+            // if cmbDetection for edge detection is 'None', method couldn't be apply
             ApplyImageFilter(true);
         }
     }
