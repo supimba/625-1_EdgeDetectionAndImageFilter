@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtBitmap.cs" />
+    <Compile Include="EdgeFilters.cs" />
     <Compile Include="ImageFilters.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

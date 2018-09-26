@@ -6,6 +6,9 @@ using System.Text;
 
 namespace ImageEdgeDetection
 {
+    /// <summary>
+    /// Allows to apply color filters.
+    /// </summary>
     public static class ImageFilters
     {
         //Rainbow Filter

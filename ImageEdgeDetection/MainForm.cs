@@ -21,10 +21,11 @@ namespace ImageEdgeDetection
     /// </summary>
     public partial class MainForm : Form
     {
-        // originalBitmap image load by the user
+        // original image load by the user
         private Bitmap originalBitmap = null;
         // previewBitmap show in the main form
         private Bitmap previewBitmap = null;
+        // resultBitmap image after applying a filter
         private Bitmap imageFilterResult = null;
         // resultBitmap image after applying a filter
         private Bitmap resultBitmap = null;
@@ -38,8 +39,9 @@ namespace ImageEdgeDetection
         public MainForm()
         {
             InitializeComponent();
-
             cmbEdgeDetection.SelectedIndex = 0;
+            cmbEdgeDetection.Enabled = false;
+            cmbFilters.Enabled = false;
         }
 
         private void btnOpenOriginal_Click(object sender, EventArgs e)
@@ -57,18 +59,29 @@ namespace ImageEdgeDetection
 
                 previewBitmap = originalBitmap.CopyToSquareCanvas(picPreview.Width);
                 picPreview.Image = previewBitmap;
+                bitmapResult = originalBitmap;
 
+                if (cmbEdgeDetection.SelectedItem.ToString() != "None")
+                {
+                    cmbFilters.Enabled = false;
+                }
+                else
+                {
+                    cmbFilters.Enabled = true;
+                    cmbEdgeDetection.Enabled = true;
+                }
+                ApplyImageFilter(true);
                 ApplyEdgeDetection(true);
             }
         }
-
+        // save the filtered image
         private void btnSaveNewImage_Click(object sender, EventArgs e)
         {
             if (imageFilter == true)
                 ApplyImageFilter(false);
 
             ApplyEdgeDetection(false);
-
+            // the image must been filtered
             if (resultBitmap != null)
             {
                 SaveFileDialog sfd = new SaveFileDialog();
@@ -94,7 +107,7 @@ namespace ImageEdgeDetection
                     resultBitmap.Save(streamWriter.BaseStream, imgFormat);
                     streamWriter.Flush();
                     streamWriter.Close();
-
+                    // clear the filtred image after saving
                     resultBitmap = null;
                 }
             }
@@ -124,6 +137,7 @@ namespace ImageEdgeDetection
 
             if (selectedSource != null)
             {
+                // retrieve the selected edge filter
                 switch (cmbEdgeDetection.SelectedItem.ToString())
                 {
                     case "None":
@@ -211,7 +225,7 @@ namespace ImageEdgeDetection
             {
                 selectedSource = originalBitmap;
             }
-
+            // retrieve the selected image filter
             if (selectedSource != null)
             {
                 switch (cmbFilters.SelectedItem.ToString())
@@ -246,7 +260,7 @@ namespace ImageEdgeDetection
 
         }
 
-        // event endler to apply the selected edge filter
+        // event handler to apply the selected edge filter
         private void CmbEdgeDetectionSelectedItemEventHandler(object sender, EventArgs e)
         {
             if (cmbEdgeDetection.SelectedItem.ToString() != "None")
@@ -259,10 +273,10 @@ namespace ImageEdgeDetection
             }
             ApplyEdgeDetection(true);
         }
-
+        // event handler to apply the selected edge filter
         private void CmbFiltersSelectedItemEventHandler(object sender, EventArgs e)
         {
-            // if cmbDetection for edge detection is 'None', method couldn't be apply
+            // if cmbEdgeDetection is 'None', method couldn't be apply
             ApplyImageFilter(true);
         }
     }

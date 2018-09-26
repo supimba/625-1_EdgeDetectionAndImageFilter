@@ -100,6 +100,7 @@
             this.cmbEdgeDetection.Size = new System.Drawing.Size(288, 32);
             this.cmbEdgeDetection.TabIndex = 20;
             this.cmbEdgeDetection.SelectedIndexChanged += new System.EventHandler(this.CmbEdgeDetectionSelectedItemEventHandler);
+            
             // 
             // cmbFilters
             // 
@@ -116,6 +117,7 @@
             this.cmbFilters.Size = new System.Drawing.Size(288, 32);
             this.cmbFilters.TabIndex = 20;
             this.cmbFilters.SelectedIndexChanged += new System.EventHandler(this.CmbFiltersSelectedItemEventHandler);
+            
             // 
             // MainForm
             // 
