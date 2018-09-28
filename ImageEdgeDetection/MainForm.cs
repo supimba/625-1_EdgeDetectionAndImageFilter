@@ -109,7 +109,13 @@ namespace ImageEdgeDetection
                     streamWriter.Close();
                     // clear the filtred image after saving
                     resultBitmap = null;
+
+                    MessageBox.Show("The image has been saved in " + sfd.FileName.ToString(), "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Please upload an image to save.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         // apply an edge filter
