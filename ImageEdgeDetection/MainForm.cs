@@ -21,19 +21,19 @@ namespace ImageEdgeDetection
     /// </summary>
     public partial class MainForm : Form
     {
-        // original image load by the user
+        // original image loaded by the user
         private Bitmap originalBitmap = null;
         // previewBitmap show in the main form
         private Bitmap previewBitmap = null;
         // resultBitmap image after applying a filter
         private Bitmap imageFilterResult = null;
-        // resultBitmap image after applying a filter
+        // resultBitmap image after applying edge detection
         private Bitmap resultBitmap = null;
-        // the selectedSource is use like a temporary image before the save
+        // the selectedSource is used like a temporary image before the save
         private Bitmap selectedSource = null;
-        // bitmapResult is the image that will be save
+        // bitmapResult is the image that will be saved
         private Bitmap bitmapResult = null;
-        // used to know if the image has been already filter
+        // used to know if the image has been already filtered
         private bool imageFilter;
 
         public MainForm()
@@ -81,7 +81,7 @@ namespace ImageEdgeDetection
                 ApplyImageFilter(false);
 
             ApplyEdgeDetection(false);
-            // the image must been filtered
+            // the image must be filtered
             if (resultBitmap != null)
             {
                 SaveFileDialog sfd = new SaveFileDialog();
@@ -107,7 +107,7 @@ namespace ImageEdgeDetection
                     resultBitmap.Save(streamWriter.BaseStream, imgFormat);
                     streamWriter.Flush();
                     streamWriter.Close();
-                    // clear the filtred image after saving
+                    // clear the filtered image after saving
                     resultBitmap = null;
 
                     MessageBox.Show("The image has been saved in " + sfd.FileName.ToString(), "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -118,7 +118,7 @@ namespace ImageEdgeDetection
                 MessageBox.Show("Please upload an image to save.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        // apply an edge filter
+        // apply an edge detection
         private void ApplyEdgeDetection(bool preview)
         {
             if (previewBitmap == null || cmbEdgeDetection.SelectedIndex == -1)
@@ -143,7 +143,7 @@ namespace ImageEdgeDetection
 
             if (selectedSource != null)
             {
-                // retrieve the selected edge filter
+                // retrieve selected edge filter
                 switch (cmbEdgeDetection.SelectedItem.ToString())
                 {
                     case "None":
@@ -231,7 +231,7 @@ namespace ImageEdgeDetection
             {
                 selectedSource = originalBitmap;
             }
-            // retrieve the selected image filter
+            // retrieve selected image filter
             if (selectedSource != null)
             {
                 switch (cmbFilters.SelectedItem.ToString())
@@ -269,6 +269,7 @@ namespace ImageEdgeDetection
         // event handler to apply the selected edge filter
         private void CmbEdgeDetectionSelectedItemEventHandler(object sender, EventArgs e)
         {
+            // if cmbEdgeDetection is 'None', method couldn't be applied
             if (cmbEdgeDetection.SelectedItem.ToString() != "None")
             {
                 cmbFilters.Enabled = false;
@@ -282,7 +283,6 @@ namespace ImageEdgeDetection
         // event handler to apply the selected edge filter
         private void CmbFiltersSelectedItemEventHandler(object sender, EventArgs e)
         {
-            // if cmbEdgeDetection is 'None', method couldn't be apply
             ApplyImageFilter(true);
         }
     }
