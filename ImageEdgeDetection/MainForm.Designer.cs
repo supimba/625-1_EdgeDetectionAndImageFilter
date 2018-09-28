@@ -58,7 +58,7 @@
             this.btnOpenOriginal.TabIndex = 15;
             this.btnOpenOriginal.Text = "Load Image";
             this.btnOpenOriginal.UseVisualStyleBackColor = true;
-            this.btnOpenOriginal.Click += new System.EventHandler(this.btnOpenOriginal_Click);
+            this.btnOpenOriginal.Click += new System.EventHandler(this.BtnOpenOriginalClick);
             // 
             // btnSaveNewImage
             // 
@@ -69,7 +69,7 @@
             this.btnSaveNewImage.TabIndex = 16;
             this.btnSaveNewImage.Text = "Save Image";
             this.btnSaveNewImage.UseVisualStyleBackColor = true;
-            this.btnSaveNewImage.Click += new System.EventHandler(this.btnSaveNewImage_Click);
+            this.btnSaveNewImage.Click += new System.EventHandler(this.BtnSaveNewImageClick);
             // 
             // cmbEdgeDetection
             // 

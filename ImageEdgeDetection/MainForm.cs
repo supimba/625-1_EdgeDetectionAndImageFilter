@@ -44,7 +44,7 @@ namespace ImageEdgeDetection
             cmbFilters.Enabled = false;
         }
 
-        private void btnOpenOriginal_Click(object sender, EventArgs e)
+        private void BtnOpenOriginalClick(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Select an image file.";
@@ -75,7 +75,7 @@ namespace ImageEdgeDetection
             }
         }
         // save the filtered image
-        private void btnSaveNewImage_Click(object sender, EventArgs e)
+        private void BtnSaveNewImageClick(object sender, EventArgs e)
         {
             if (imageFilter == true)
                 ApplyImageFilter(false);

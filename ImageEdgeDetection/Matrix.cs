@@ -22,7 +22,6 @@ namespace ImageEdgeDetection
                   { -1, -1, -1,  }, };
             }
         }
-
         public static double[,] Laplacian5x5
         {
             get
@@ -35,7 +34,6 @@ namespace ImageEdgeDetection
                   { -1, -1, -1, -1, -1  }, };
             }
         }
-
         public static double[,] LaplacianOfGaussian
         {
             get
@@ -48,7 +46,6 @@ namespace ImageEdgeDetection
                   {  0,   0, -1,  0,  0 }, };
             }
         }
-
         public static double[,] Gaussian3x3
         {
             get
@@ -59,7 +56,6 @@ namespace ImageEdgeDetection
                   { 1, 2, 1, }, };
             }
         }
-
         public static double[,] Gaussian5x5Type1
         {
             get
@@ -72,7 +68,6 @@ namespace ImageEdgeDetection
                   { 2, 04, 05, 04, 2 }, };
             }
         }
-
         public static double[,] Gaussian5x5Type2
         {
             get
@@ -85,7 +80,6 @@ namespace ImageEdgeDetection
                   {  1,   4,  6,  4,  1 }, };
             }
         }
-
         public static double[,] Sobel3x3Horizontal
         {
             get
@@ -96,7 +90,6 @@ namespace ImageEdgeDetection
                   { -1,  0,  1, }, };
             }
         }
-
         public static double[,] Sobel3x3Vertical
         {
             get
@@ -107,7 +100,6 @@ namespace ImageEdgeDetection
                   { -1, -2, -1, }, };
             }
         }
-
         public static double[,] Prewitt3x3Horizontal
         {
             get
@@ -118,7 +110,6 @@ namespace ImageEdgeDetection
                   { -1,  0,  1, }, };
             }
         }
-
         public static double[,] Prewitt3x3Vertical
         {
             get
@@ -129,8 +120,6 @@ namespace ImageEdgeDetection
                   { -1, -1, -1, }, };
             }
         }
-
-
         public static double[,] Kirsch3x3Horizontal
         {
             get
@@ -141,7 +130,6 @@ namespace ImageEdgeDetection
                   { -3, -3, -3, }, };
             }
         }
-
         public static double[,] Kirsch3x3Vertical
         {
             get
