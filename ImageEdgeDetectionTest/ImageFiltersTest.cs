@@ -12,24 +12,15 @@ namespace ImageEdgeDetectionTest
         [TestMethod]
         public void BlackWhiteTest()
         {
-            int width = 100;
-            int height = 100;
-            int redValue = 120;
-            int red;
-            int greenValue = 90;
-            int green;
-            int blueValue = 150;
-            int blue;
-            int rgb = (int)((redValue + greenValue + blueValue) / 3);
             Color color;
 
-            Bitmap TestImg = new Bitmap(width, height);
+            Bitmap TestImg = new Bitmap(100, 100);
             Bitmap Result;
 
             for (int y = 0; y < TestImg.Height; y++)
                 for (int x = 0; x < TestImg.Width; x++)
                 {
-                    TestImg.SetPixel(x, y, Color.FromArgb(redValue, greenValue, blueValue));
+                    TestImg.SetPixel(x, y, Color.FromArgb(120, 90, 150));
                 }
 
             Result = ImageFilters.BlackWhite(TestImg);
@@ -38,12 +29,9 @@ namespace ImageEdgeDetectionTest
                 for (int x = 0; x < Result.Width; x++)
                 {
                     color = Result.GetPixel(x, y);
-                    red = (int) color.R;
-                    green = (int) color.G;
-                    blue = (int) color.B;
-                    Assert.AreEqual(red, rgb);
-                    Assert.AreEqual(green, rgb);
-                    Assert.AreEqual(blue, rgb);
+                    Assert.AreEqual((int)color.R, 120);
+                    Assert.AreEqual((int)color.G, 120);
+                    Assert.AreEqual((int)color.B, 120);
                 }
         }
     }
