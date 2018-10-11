@@ -1,14 +1,6 @@
 ﻿using ImageEdgeDetection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ImageEdgeDetection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static ImageEdgeDetection.MainForm;
 
 namespace ImageEdgeDetectionTest
 {
@@ -30,8 +22,7 @@ namespace ImageEdgeDetectionTest
 
 
             }
-        }
-    
+
         /*Filter tested : Laplacian 3x3 in EdgeFilters class*/
         [TestMethod]
         public void Laplacian3x3FilterTest()
