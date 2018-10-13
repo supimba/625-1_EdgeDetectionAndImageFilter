@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using ImageEdgeDetection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static ImageEdgeDetection.MainForm;
 
 namespace ImageEdgeDetectionTest
 {
@@ -18,16 +12,38 @@ namespace ImageEdgeDetectionTest
             public void CopyToSquareCanvas_TransformImageToSquare_ReturnsSquareCanvasBitmap()
             {
                 // Arrange
+                var picPreviewWidth = 600;
+                var ratio = 1.0f;
                 var sourceBitmap = new Bitmap("C:\\Users\\dnlro\\Pictures\\Camera Roll\\WIN_20161224_10_18_24_Pro.jpg");
 
                 // Act
-                var result = EdgeFilters.CopyToSquareCanvas(sourceBitmap, 600); 
+                var result = sourceBitmap.CopyToSquareCanvas(600); 
                 
                 // Assert
                 Assert.AreNotSame(result, sourceBitmap);
+                Assert.AreEqual(result.Width, picPreviewWidth);
+                
+            }
 
+        [TestMethod]
+        public void CopyToSquareCanvas_ApplyEdgeLaplacian3x3Filter_ReturnsBitmap()
+        {
+            // Arrange
+            var sourceBitmap = new Bitmap("C:\\Users\\dnlro\\Pictures\\Camera Roll\\WIN_20161224_10_18_24_Pro.jpg");
+
+            // Act
+            var resultBitmap = EdgeFilters.Laplacian3x3Filter(sourceBitmap, false);
+
+            // Assert
+            for (int width = 0; width < sourceBitmap.Width; width++)
+            {
+                for (int height = 0; height < sourceBitmap.Height; height++)
+                {
+                    Assert.AreEqual(sourceBitmap.GetPixel(width, height), resultBitmap.GetPixel(width, height));
+                }
 
             }
         }
+    }
     
 }

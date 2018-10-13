@@ -38,10 +38,7 @@ namespace ImageEdgeDetection
                 graphicsResult.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 graphicsResult.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-                graphicsResult.DrawImage(sourceBitmap,
-                new Rectangle(0, 0,
-                bitmapResult.Width, bitmapResult.Height),
-                new Rectangle(0, 0,
+                graphicsResult.DrawImage(sourceBitmap, new Rectangle(0, 0, bitmapResult.Width, bitmapResult.Height), new Rectangle(0, 0,
                 sourceBitmap.Width, sourceBitmap.Height),
                 GraphicsUnit.Pixel);
                 graphicsResult.Flush();
@@ -72,35 +69,28 @@ namespace ImageEdgeDetection
                 ApplyGreyScale(pixelBuffer); 
             }
 
-            double blue = 0.0;
-            double green = 0.0;
-            double red = 0.0;
-
             int filterWidth = filterMatrix.GetLength(1);
-            int filterHeight = filterMatrix.GetLength(0);
+            // TODO Delete, cause never used
+            //            int filterHeight = filterMatrix.GetLength(0);
 
             int filterOffset = (filterWidth - 1) / 2;
-            int calcOffset = 0;
-
-            int byteOffset = 0;
-
             for (int offsetY = filterOffset; offsetY <
             sourceBitmap.Height - filterOffset; offsetY++)
             {
                 for (int offsetX = filterOffset; offsetX < sourceBitmap.Width - filterOffset; offsetX++)
                 {
-                    blue = 0;
-                    green = 0;
-                    red = 0;
+                    double blue = 0;
+                    double green = 0;
+                    double red = 0;
 
-                    byteOffset = offsetY * sourceData.Stride + offsetX * 4;
+                    int byteOffset = offsetY * sourceData.Stride + offsetX * 4;
 
                     for (int filterY = -filterOffset; filterY <= filterOffset; filterY++)
                     {
                         for (int filterX = -filterOffset;
                         filterX <= filterOffset; filterX++)
                         {
-                            calcOffset = byteOffset + (filterX * 4) + (filterY * sourceData.Stride);
+                            int calcOffset = byteOffset + (filterX * 4) + (filterY * sourceData.Stride);
 
                             blue += (double)(pixelBuffer[calcOffset]) * filterMatrix[filterY + filterOffset, filterX + filterOffset];
 
@@ -177,36 +167,30 @@ namespace ImageEdgeDetection
                 ApplyGreyScale(pixelBuffer); 
             }
 
-            double blueX = 0.0;
-            double greenX = 0.0;
-            double redX = 0.0;
-
-            double blueY = 0.0;
-            double greenY = 0.0;
-            double redY = 0.0;
-
-            double blueTotal = 0.0;
-            double greenTotal = 0.0;
-            double redTotal = 0.0;
-
             int filterOffset = 1;
-            int calcOffset = 0;
-
-            int byteOffset = 0;
-
             for (int offsetY = filterOffset; offsetY < sourceBitmap.Height - filterOffset; offsetY++)
             {
                 for (int offsetX = filterOffset; offsetX <
                 sourceBitmap.Width - filterOffset; offsetX++)
                 {
-                    blueX = greenX = redX = 0;
-                    blueY = greenY = redY = 0;
 
-                    blueTotal = greenTotal = redTotal = 0.0;
+                    double greenX = 0.0;
 
-                    byteOffset = offsetY *
-                    sourceData.Stride +
-                    offsetX * 4;
+                    double redX = 0.0;
+                    double blueX = greenX = redX = 0;
+
+                    double greenY = 0.0;
+
+                    double redY = 0.0;
+                    double blueY = greenY = redY = 0;
+
+
+                    double greenTotal = 0.0;
+
+                    double redTotal = 0.0;
+                    double blueTotal = greenTotal = redTotal = 0.0;
+
+                    int byteOffset = offsetY * sourceData.Stride + offsetX * 4;
 
                     for (int filterY = -filterOffset;
                     filterY <= filterOffset; filterY++)
@@ -214,9 +198,7 @@ namespace ImageEdgeDetection
                         for (int filterX = -filterOffset;
                         filterX <= filterOffset; filterX++)
                         {
-                            calcOffset = byteOffset +
-                            (filterX * 4) +
-                            (filterY * sourceData.Stride);
+                            int calcOffset = byteOffset + (filterX * 4) + (filterY * sourceData.Stride);
 
                             blueX += (double)(pixelBuffer[calcOffset]) *
                             xFilterMatrix[filterY + filterOffset,
@@ -272,8 +254,7 @@ namespace ImageEdgeDetection
 
             Bitmap resultBitmap = new Bitmap(sourceBitmap.Width, sourceBitmap.Height);
 
-            BitmapData resultData = resultBitmap.LockBits(new Rectangle(0, 0,
-            resultBitmap.Width, resultBitmap.Height),
+            BitmapData resultData = resultBitmap.LockBits(new Rectangle(0, 0, resultBitmap.Width, resultBitmap.Height),
             ImageLockMode.WriteOnly,
             PixelFormat.Format32bppArgb);
 
@@ -302,8 +283,7 @@ namespace ImageEdgeDetection
         public static Bitmap Laplacian3x3Filter(this Bitmap sourceBitmap,
         bool grayscale = true)
         {
-            Bitmap resultBitmap = EdgeFilters.ConvolutionFilter(sourceBitmap,
-            Matrix.Laplacian3x3, 1.0, 0, grayscale);
+            Bitmap resultBitmap = EdgeFilters.ConvolutionFilter(sourceBitmap, Matrix.Laplacian3x3, 1.0, 0, grayscale);
 
             return resultBitmap;
         }
