@@ -29,4 +29,4 @@ Refactor MainForm in order to prepare original size image for saving in order to
 Created test project and test classes
 Created test for black and white image filter : ImageFilters.BlackWhite(img)
 MainForm is not tested because setting methods to public static is not a good practice
-Created test for Laplacian 3x3 filter : EdgeFilters.Laplacian3x3Filter(img, false)
+Adapted BlackWhiteTest method according to Dominique's feedback
