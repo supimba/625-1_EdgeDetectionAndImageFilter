@@ -45,16 +45,17 @@ namespace ImageEdgeDetectionTest
             }
         }
 
-        /*Filter tested : Laplacian 3x3 in EdgeFilters class*/
+        /* @author : Alicia
+         * Filter tested : Sobel3x3Filter in EdgeFilters class with Grayscale*/
         [TestMethod]
-        public void Laplacian3x3FilterTest()
+        public void Sobel3x3FilterrTest()
         {
             // Custom image used for test
             Bitmap TestImg = new Bitmap(100, 100);
             // Method result for comparison
             Bitmap Result;
 
-            Result = EdgeFilters.Laplacian3x3Filter(TestImg, false);
+            Result = EdgeFilters.Sobel3x3Filter(TestImg, true);
 
             // TODO : apply method manually or predict result in order to compare with method's result
         }
