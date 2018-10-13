@@ -34,7 +34,16 @@ namespace ImageEdgeDetectionTest
             // Act
             var resultBitmap = EdgeFilters.Laplacian3x3Filter(sourceBitmap, false);
 
+            // Assert
+            for (int width = 0; width < sourceBitmap.Width; width++)
+            {
+                for (int height = 0; height < sourceBitmap.Height; height++)
+                {
+                    Assert.AreEqual(sourceBitmap.GetPixel(width, height), resultBitmap.GetPixel(width, height));
+                }
+
             }
+        }
 
         /*Filter tested : Laplacian 3x3 in EdgeFilters class*/
         [TestMethod]
@@ -49,5 +58,6 @@ namespace ImageEdgeDetectionTest
 
             // TODO : apply method manually or predict result in order to compare with method's result
         }
+
     }
 }

@@ -1,5 +1,5 @@
 /*
-** Summary of what has been achieved
+** TP 1 : Summary of what has been achieved
 */
 Imported ImageFilters.cs class
 Added new DropDownList in MainForm.Designer.cs (cmbFilters)
@@ -22,3 +22,11 @@ Add comments
 Optimize the ConvolutionFilter and create one method
 Improve user experience with customized design
 Refactor MainForm in order to prepare original size image for saving in order to avoid applying filters for display and re-apply them for save action
+
+/*
+** TP 2 
+*/
+Created test project and test classes
+Created test for black and white image filter : ImageFilters.BlackWhite(img)
+MainForm is not tested because setting methods to public static is not a good practice
+Created test for Laplacian 3x3 filter : EdgeFilters.Laplacian3x3Filter(img, false)

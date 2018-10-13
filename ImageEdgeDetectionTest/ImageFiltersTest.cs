@@ -8,13 +8,18 @@ namespace ImageEdgeDetectionTest
     [TestClass]
     public class ImageFiltersTest
     {
-        /*Filter tested : black & white from ImageFilters class*/
+        /* Filter tested : black & white in ImageFilters class.
+         * A small custom bitmap is tested with corresponding method and arbitrary values for RGB parameters (120, 90, 150).
+         * Expected result for new color.R, color.G and color.B is 120 with those values.
+         * */
         [TestMethod]
         public void BlackWhiteTest()
         {
+            // color variable used for comparison test
             Color color;
-
+            // Custom image used for test
             Bitmap TestImg = new Bitmap(100, 100);
+            // Method result for comparison
             Bitmap Result;
 
             for (int y = 0; y < TestImg.Height; y++)
