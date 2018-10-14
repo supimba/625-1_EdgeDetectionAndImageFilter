@@ -8,15 +8,14 @@ namespace ImageEdgeDetectionTest
     [TestClass]
     public class ImageFiltersTest
     {
-        /* Filter tested : black & white in ImageFilters class.
+        /* @author : Alicia
+         * Filter tested : black & white in ImageFilters class.
          * A small custom bitmap is tested with corresponding method and arbitrary values for RGB parameters (120, 90, 150).
          * Expected result for new color.R, color.G and color.B is 120 with those values.
          * */
         [TestMethod]
         public void BlackWhiteTest()
         {
-            // color variable used for comparison test
-            Color color;
             // Custom image used for test
             Bitmap TestImg = new Bitmap(100, 100);
             // Method result for comparison
@@ -29,15 +28,29 @@ namespace ImageEdgeDetectionTest
                 }
 
             Result = ImageFilters.BlackWhite(TestImg);
+            Assert.IsTrue(IsPixelColorEqual(Result));            
+        }
+
+        /* @author : Alicia
+         * Method used to compare RGB parameters values*/
+        public bool IsPixelColorEqual(Bitmap Result)
+        {
+            // result of test, set to false
+            bool IsEqual = false;
+            // color variable used for comparison test
+            Color color;
 
             for (int y = 0; y < Result.Height; y++)
                 for (int x = 0; x < Result.Width; x++)
                 {
                     color = Result.GetPixel(x, y);
-                    Assert.AreEqual((int)color.R, 120);
-                    Assert.AreEqual((int)color.G, 120);
-                    Assert.AreEqual((int)color.B, 120);
+                    if (color.R == 120 && color.G == 120 && color.B == 120)
+                        IsEqual = true;
+                    else
+                        IsEqual = false;
                 }
+
+            return IsEqual;
         }
 
         [TestMethod]
