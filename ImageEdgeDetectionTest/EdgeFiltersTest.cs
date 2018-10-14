@@ -1,4 +1,5 @@
-﻿using ImageEdgeDetection;
+﻿using System;
+using ImageEdgeDetection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
 
@@ -8,42 +9,83 @@ namespace ImageEdgeDetectionTest
     public class EdgeFiltersTest
     {
 
-            [TestMethod]
-            public void CopyToSquareCanvas_TransformImageToSquare_ReturnsSquareCanvasBitmap()
-            {
-                // Arrange
-                var picPreviewWidth = 600;
-                var ratio = 1.0f;
-                var sourceBitmap = new Bitmap("C:\\Users\\dnlro\\Pictures\\Camera Roll\\WIN_20161224_10_18_24_Pro.jpg");
-
-                // Act
-                var result = sourceBitmap.CopyToSquareCanvas(600); 
-                
-                // Assert
-                Assert.AreNotSame(result, sourceBitmap);
-                Assert.AreEqual(result.Width, picPreviewWidth);
-                
-            }
-
         [TestMethod]
-        public void CopyToSquareCanvas_ApplyEdgeLaplacian3x3Filter_ReturnsBitmap()
+        public void CopyToSquareCanvas_TransformImageToSquare_ReturnsSquareCanvasBitmap()
         {
             // Arrange
-            var sourceBitmap = new Bitmap("C:\\Users\\dnlro\\Pictures\\Camera Roll\\WIN_20161224_10_18_24_Pro.jpg");
+            var picPreviewWidth = 600;
+            var ratio = 1.0f;
+            var sourceBitmap = new Bitmap(Properties.Resources.unitTestPropImage1);
 
             // Act
-            var resultBitmap = EdgeFilters.Laplacian3x3Filter(sourceBitmap, false);
-
+            var result = sourceBitmap.CopyToSquareCanvas(600); 
+            
             // Assert
-            for (int width = 0; width < sourceBitmap.Width; width++)
-            {
-                for (int height = 0; height < sourceBitmap.Height; height++)
-                {
-                    Assert.AreEqual(sourceBitmap.GetPixel(width, height), resultBitmap.GetPixel(width, height));
-                }
+            Assert.AreNotEqual(result, sourceBitmap);
 
-            }
+            
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void CopyToSquareCanvas_PropertiesAreNullOrEmpty_ReturnException()
+        {
+            // Arrange
+            Bitmap sourceBitmap = null;
+
+            // Act
+            var result = EdgeFilters.CopyToSquareCanvas(sourceBitmap, 0); 
+        }
+
+        [TestMethod]
+        public void Laplacian3x3Matrix_LaplacianIsCorrect_ReturnsMatrixDouble()
+        {
+            // Arrange
+            var expectedLaplacianMatrix = new double[,]
+            { { -1, -1, -1,  },
+                { -1,  8, -1,  },
+                { -1, -1, -1,  }, };
+            // Act
+            var result = Matrix.Laplacian3x3; 
+
+            CollectionAssert.AreEqual(expectedLaplacianMatrix, result);
+        }
+
+        [TestMethod]
+        public void Laplacian3x3Filter_CompareBitmapSize_ReturnsBitmapSizeAfterTransformation()
+        {
+            // Arrange
+            var sourceBitmap = new Bitmap(Properties.Resources.unitTestPropImage1);
+            // Act
+            var resultBitmap = EdgeFilters.Laplacian3x3Filter(sourceBitmap);
+            // Assert
+            Assert.AreEqual(sourceBitmap.Width, resultBitmap.Width);
+        }
+
+        [TestMethod]
+        public void LaplacianOfGaussianFilter_CompareBitmapSize_ReturnsBitmapSizeAfterTransformation()
+        {
+            // Arrange
+            var sourceBitmap = new Bitmap(Properties.Resources.unitTestPropImage1);
+            // Act
+            var resultBitmap = EdgeFilters.LaplacianOfGaussianFilter(sourceBitmap);
+            // Assert
+            Assert.AreEqual(sourceBitmap.Width, resultBitmap.Width);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void ConvolutionFilter_ImageIsNull_ReturnsException()
+        {
+            // Arrange
+            Bitmap sourceBitmap = null;
+
+            // Act
+            var result = EdgeFilters.ConvolutionFilter(sourceBitmap, Matrix.Laplacian3x3, new double[1,0] , 0, 0); 
+
+        }
+
 
         /*Filter tested : Laplacian 3x3 in EdgeFilters class*/
         [TestMethod]

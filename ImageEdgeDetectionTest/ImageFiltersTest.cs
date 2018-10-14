@@ -39,5 +39,15 @@ namespace ImageEdgeDetectionTest
                     Assert.AreEqual((int)color.B, 120);
                 }
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ApplyFilter_InvalidArguments_ReturnsArgumentException()
+        {
+            // Arrange
+            var sourceBitmap = Properties.Resources.unitTestPropImage1;
+            // Act
+            var resultBitmap = ImageFilters.ApplyFilter(sourceBitmap, -1, -1, -1,-1); 
+        }
     }
 }
