@@ -51,7 +51,7 @@ namespace ImageEdgeDetectionTest
         }
 
         /* @author : Alicia
-         * Filter tested : Sobel3x3Filter in EdgeFilters class with Grayscale.
+         * Filter tested : Sobel3x3Filter in EdgeFilters class without Grayscale.
          * Byte per byte image comparison: we make the hypothesis that we have a reference image to compare with filtered image */
         [TestMethod]
         public void Sobel3x3FilterTest()
