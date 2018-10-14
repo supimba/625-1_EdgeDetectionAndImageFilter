@@ -1,7 +1,10 @@
 ﻿using ImageEdgeDetection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace ImageEdgeDetectionTest
@@ -48,24 +51,26 @@ namespace ImageEdgeDetectionTest
         }
 
         /* @author : Alicia
-         * Filter tested : Sobel3x3Filter in EdgeFilters class with Grayscale
-         * Warning : this test method is not really the best, because we make the hypothesis
-         * that we have a reference image to compare with filtered image */
+         * Filter tested : Sobel3x3Filter in EdgeFilters class with Grayscale.
+         * Byte per byte image comparison: we make the hypothesis that we have a reference image to compare with filtered image */
         [TestMethod]
-        public void Sobel3x3FilterrTest()
+        public void Sobel3x3FilterTest()
         {
             // Custom image used for test
-            Bitmap TestImg = new Bitmap(10, 10);
+            Bitmap TestImg = Properties.Resources.cherry;
             // Method result for comparison
             Bitmap Result;
             // Reference image for comparison
-            Bitmap Reference = null; // TODO add resource and compare
+            Bitmap Reference = Properties.Resources.cherry_sobel;
 
-            Result = EdgeFilters.Sobel3x3Filter(TestImg, true);
+            Result = EdgeFilters.Sobel3x3Filter(TestImg, false);
 
-            Assert.IsTrue(CompareBitmap(TestImg, TestImg));
+            Assert.IsTrue(CompareBitmap(Result, Reference));
         }
 
+        /* @author : Alicia
+         * Byte per byte bitmap comparison.
+         * If images are the same, return true. If not, return false.*/
         public bool CompareBitmap(Bitmap bmp1, Bitmap bmp2)
         {
             if (bmp1 == null || bmp2 == null)
