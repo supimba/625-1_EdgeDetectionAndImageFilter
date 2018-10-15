@@ -29,5 +29,7 @@ Refactor MainForm in order to prepare original size image for saving in order to
 Created test project and test classes
 Created test for black and white image filter : ImageFilters.BlackWhite(img)
 MainForm is not tested because setting methods to public static is not a good practice
-Adapted BlackWhiteTest method according to Dominique's feedback
+Adapted BlackWhiteTest methods according to Dominique's feedback
 Added Sobel3x3FilterTest method in EdgeFiltersTest class
+Added RainbowTest methods 
+Corrected RainbowFilter method for 100% code coverage : raz = bmp.Width / 4 instead of raz = bmp.Height / 4 and removed last else
