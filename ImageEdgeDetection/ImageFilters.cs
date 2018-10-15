@@ -15,7 +15,7 @@ namespace ImageEdgeDetection
         public static Bitmap RainbowFilter(Bitmap bmp)
         {
             Bitmap temp = new Bitmap(bmp.Width, bmp.Height);
-            int raz = bmp.Height / 4;
+            int raz = bmp.Width / 4;
             for (int i = 0; i < bmp.Width; i++)
             {
                 for (int x = 0; x < bmp.Height; x++)
@@ -32,13 +32,9 @@ namespace ImageEdgeDetection
                     {
                         temp.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R, bmp.GetPixel(i, x).G, bmp.GetPixel(i, x).B / 5));
                     }
-                    else if (i < (raz * 4))
-                    {
-                        temp.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R / 5, bmp.GetPixel(i, x).G, bmp.GetPixel(i, x).B / 5));
-                    }
                     else
                     {
-                        temp.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R / 5, bmp.GetPixel(i, x).G / 5, bmp.GetPixel(i, x).B / 5));
+                        temp.SetPixel(i, x, Color.FromArgb(bmp.GetPixel(i, x).R / 5, bmp.GetPixel(i, x).G, bmp.GetPixel(i, x).B / 5));
                     }
                 }
             }

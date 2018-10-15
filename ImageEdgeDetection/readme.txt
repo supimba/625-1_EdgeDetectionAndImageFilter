@@ -31,6 +31,8 @@ Created test for black and white image filter : ImageFilters.BlackWhite(img)
 MainForm is not tested because setting methods to public static is not a good practice
 Adapted BlackWhiteTest method according to Dominique's feedback
 Added Sobel3x3FilterTest method in EdgeFiltersTest class
+Added RainbowTest methods 
+Corrected RainbowFilter method for 100% code coverage
 Added exceptions test for RainbowFilter in ImageFiltersTest
 Added exceptions test for CopyToSquare method in EdgeFiltersTest
 Added test to check the Matrix for Laplacian3x3
