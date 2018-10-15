@@ -62,5 +62,16 @@ namespace ImageEdgeDetectionTest
             // Act
             var resultBitmap = ImageFilters.ApplyFilter(sourceBitmap, -1, -1, -1,-1); 
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void RainbowFilter_ArgumentIsNull_ReturnsNullReferenceException()
+        {
+            // Arrange
+            Bitmap sourceBitmap = new Bitmap(100, 100);
+            sourceBitmap = null; 
+            // Act
+            var resultBitmap = ImageFilters.RainbowFilter(sourceBitmap);
+        }
     }
 }

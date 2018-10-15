@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 
 namespace ImageEdgeDetectionTest
 {
@@ -21,14 +22,10 @@ namespace ImageEdgeDetectionTest
             var picPreviewWidth = 600;
             var ratio = 1.0f;
             var sourceBitmap = new Bitmap(Properties.Resources.unitTestPropImage1);
-
             // Act
             var result = sourceBitmap.CopyToSquareCanvas(600); 
-            
             // Assert
             Assert.AreNotEqual(result, sourceBitmap);
-
-            
         }
 
         [TestMethod]
@@ -37,7 +34,6 @@ namespace ImageEdgeDetectionTest
         {
             // Arrange
             Bitmap sourceBitmap = null;
-
             // Act
             var result = EdgeFilters.CopyToSquareCanvas(sourceBitmap, 0); 
         }
@@ -64,7 +60,7 @@ namespace ImageEdgeDetectionTest
             // Act
             var resultBitmap = EdgeFilters.Laplacian3x3Filter(sourceBitmap);
             // Assert
-            Assert.AreEqual(sourceBitmap.Width, resultBitmap.Width);
+            Assert.AreEqual(sourceBitmap.Size, resultBitmap.Size);
         }
 
         [TestMethod]
@@ -75,9 +71,21 @@ namespace ImageEdgeDetectionTest
             // Act
             var resultBitmap = EdgeFilters.LaplacianOfGaussianFilter(sourceBitmap);
             // Assert
-            Assert.AreEqual(sourceBitmap.Width, resultBitmap.Width);
+            Assert.AreEqual(sourceBitmap.Size, resultBitmap.Size);
         }
 
+        [TestMethod]
+        public void Laplacian3x3Filter_CompareImageWithExistingResultFromOtherSoftware_ReturnsBitmapFiltered()
+        {
+            // Arrange
+            var sourceBitmap = new Bitmap(Properties.Resources.square);
+            var existingResult = new Bitmap(Properties.Resources.square_laplacian);
+            var resultBitmap = EdgeFilters.LaplacianOfGaussianFilter(sourceBitmap);
+            // Act
+            var result = CompareImageWithPixel(existingResult, resultBitmap); 
+            // Assert
+            Assert.IsTrue(result);
+        }
 
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
@@ -85,10 +93,8 @@ namespace ImageEdgeDetectionTest
         {
             // Arrange
             Bitmap sourceBitmap = null;
-
             // Act
             var result = EdgeFilters.ConvolutionFilter(sourceBitmap, Matrix.Laplacian3x3, new double[1,0] , 0, 0); 
-
         }
 
         /* @author : Alicia
@@ -146,6 +152,43 @@ namespace ImageEdgeDetectionTest
             bmp2.UnlockBits(bitmapData2);
 
             return result;
+        }
+
+        public byte[] GetBytes(Bitmap bitmap)
+        {
+            var bytes = new byte[bitmap.Height * bitmap.Width * 3];
+            BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            Marshal.Copy(bitmapData.Scan0, bytes, 0, bytes.Length);
+            bitmap.UnlockBits(bitmapData);
+            return bytes;
+        }
+
+        public bool CompareImageWithPixel(Bitmap existingResult, Bitmap resultBitmap)
+        {
+            bool result = true;
+            string firstPixel;
+            string secondPixel;
+
+            if (existingResult.Width == resultBitmap.Width
+                && existingResult.Height == resultBitmap.Height)
+            {
+                for (int i = 0; i < existingResult.Width; i++)
+                {
+                    for (int j = 0; j < existingResult.Height; j++)
+                    {
+                        firstPixel = resultBitmap.GetPixel(i, j).ToString();
+                        secondPixel = existingResult.GetPixel(i, j).ToString();
+                        if (firstPixel != secondPixel)
+                        {
+                            result = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            return result; 
         }
 
     }
