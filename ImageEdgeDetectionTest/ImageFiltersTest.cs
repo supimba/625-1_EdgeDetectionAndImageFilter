@@ -128,7 +128,9 @@ namespace ImageEdgeDetectionTest
 
             return IsApplied;
         }
-
+        /*
+         * @author : daniel
+         */
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void ApplyFilter_InvalidArguments_ReturnsArgumentException()
@@ -138,7 +140,9 @@ namespace ImageEdgeDetectionTest
             // Act
             var resultBitmap = ImageFilters.ApplyFilter(sourceBitmap, -1, -1, -1,-1); 
         }
-
+        /*
+         * @author: daniel
+         */
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
         public void RainbowFilter_ArgumentIsNull_ReturnsNullReferenceException()

@@ -14,7 +14,9 @@ namespace ImageEdgeDetectionTest
     [TestClass]
     public class EdgeFiltersTest
     {
-
+        /*
+         * @author: daniel
+         * */
         [TestMethod]
         public void CopyToSquareCanvas_TransformImageToSquare_ReturnsSquareCanvasBitmap()
         {
@@ -27,7 +29,9 @@ namespace ImageEdgeDetectionTest
             // Assert
             Assert.AreNotEqual(result, sourceBitmap);
         }
-
+        /*
+         * @author: daniel
+         **/
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
         public void CopyToSquareCanvas_PropertiesAreNullOrEmpty_ReturnException()
@@ -37,7 +41,9 @@ namespace ImageEdgeDetectionTest
             // Act
             var result = EdgeFilters.CopyToSquareCanvas(sourceBitmap, 0); 
         }
-
+        /*
+         * @author: daniel
+         */
         [TestMethod]
         public void Laplacian3x3Matrix_LaplacianIsCorrect_ReturnsMatrixDouble()
         {
@@ -51,7 +57,9 @@ namespace ImageEdgeDetectionTest
 
             CollectionAssert.AreEqual(expectedLaplacianMatrix, result);
         }
-
+        /*
+        * @author: daniel
+        **/
         [TestMethod]
         public void Laplacian3x3Filter_CompareBitmapSize_ReturnsBitmapSizeAfterTransformation()
         {
@@ -62,7 +70,9 @@ namespace ImageEdgeDetectionTest
             // Assert
             Assert.AreEqual(sourceBitmap.Size, resultBitmap.Size);
         }
-
+        /*
+         * @author: daniel
+         **/
         [TestMethod]
         public void LaplacianOfGaussianFilter_CompareBitmapSize_ReturnsBitmapSizeAfterTransformation()
         {
@@ -73,7 +83,9 @@ namespace ImageEdgeDetectionTest
             // Assert
             Assert.AreEqual(sourceBitmap.Size, resultBitmap.Size);
         }
-
+        /*
+         *  @author: daniel
+         **/
         [TestMethod]
         public void Laplacian3x3Filter_CompareImageWithExistingResultFromOtherSoftware_ReturnsBitmapFiltered()
         {
@@ -86,7 +98,9 @@ namespace ImageEdgeDetectionTest
             // Assert
             Assert.IsTrue(result);
         }
-
+        /*
+         * @author: daniel
+         **/
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
         public void ConvolutionFilter_ImageIsNull_ReturnsException()
@@ -94,7 +108,20 @@ namespace ImageEdgeDetectionTest
             // Arrange
             Bitmap sourceBitmap = null;
             // Act
-            var result = EdgeFilters.ConvolutionFilter(sourceBitmap, Matrix.Laplacian3x3, new double[1,0] , 0, 0); 
+            var result = EdgeFilters.ConvolutionFilter(sourceBitmap, Matrix.Laplacian3x3, new double[1,0] , 0, 0);
+            Assert.IsNull(result);
+        }
+        /*
+         * @author: daniel
+         **/
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void ApplyGreyScale_ByteArrayOutOfBounds_ReturnsIndexOutOfRangeException()
+        {
+            byte[] byteArray1 = new byte[1];
+            byte[] byteArray2 = new byte[2];
+            EdgeFilters.ApplyGreyScale(byteArray1); 
+            EdgeFilters.ApplyGreyScale(byteArray2);
         }
 
         /* @author : Alicia
@@ -153,18 +180,6 @@ namespace ImageEdgeDetectionTest
 
             return result;
         }
-
-        public byte[] GetBytes(Bitmap bitmap)
-        {
-            var bytes = new byte[bitmap.Height * bitmap.Width * 3];
-            BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-
-            Marshal.Copy(bitmapData.Scan0, bytes, 0, bytes.Length);
-            bitmap.UnlockBits(bitmapData);
-            return bytes;
-        }
-
         public bool CompareImageWithPixel(Bitmap existingResult, Bitmap resultBitmap)
         {
             bool result = true;

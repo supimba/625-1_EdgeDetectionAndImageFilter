@@ -70,8 +70,6 @@ namespace ImageEdgeDetection
             }
 
             int filterWidth = filterMatrix.GetLength(1);
-            // TODO Delete, cause never used
-            //            int filterHeight = filterMatrix.GetLength(0);
 
             int filterOffset = (filterWidth - 1) / 2;
             for (int offsetY = filterOffset; offsetY <
@@ -266,7 +264,6 @@ namespace ImageEdgeDetection
         public static void ApplyGreyScale(byte[] pixelBuffer)
         {
             float rgb = 0;
-
             for (int k = 0; k < pixelBuffer.Length; k += 4)
             {
                 rgb = pixelBuffer[k] * 0.11f;
