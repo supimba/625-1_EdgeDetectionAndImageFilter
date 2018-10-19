@@ -38,3 +38,14 @@ Added exceptions test for CopyToSquare method in EdgeFiltersTest
 Added test to check the Matrix for Laplacian3x3, Sorbel3x3Vertical
 For Laplacian3x3Filter compare an original image after it has been filtered from another software (https://www.wolframalpha.com).
 Added test for ApplyGreyScale()
+
+Not covered results:
+Exception tests cannot cover the entire code, because when an exception is thrown out, the method is discarded.
+In other words, the test does not go through all the blocks because it comes out of the method.
+
+For example: 
+		ApplyFilter_InvalidArguments_ReturnsArgumentException()	1	33.33%	2	66.67%
+		RainbowFilter_ArgumentIsNull_ReturnsNullReferenceException()	1	33.33%	2	66.67%
+		ConvolutionFilter_ImageIsNull_ReturnsException()	2	40.00%	3	60.00%
+		ApplyGreyScale_ByteArrayOutOfBounds_ReturnsIndexOutOfRangeException()	2	66.67%	1	33.33%
+		CopyToSquareCanvas_PropertiesAreNullOrEmpty_ReturnException()	2	66.67%	1	33.33%

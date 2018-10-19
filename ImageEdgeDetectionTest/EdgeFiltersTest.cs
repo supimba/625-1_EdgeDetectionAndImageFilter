@@ -39,7 +39,8 @@ namespace ImageEdgeDetectionTest
             // Arrange
             Bitmap sourceBitmap = null;
             // Act
-            var result = EdgeFilters.CopyToSquareCanvas(sourceBitmap, 0); 
+            var result = EdgeFilters.CopyToSquareCanvas(sourceBitmap,-20);
+            Assert.IsNull(sourceBitmap);
         }
         /*
          * @author: daniel
