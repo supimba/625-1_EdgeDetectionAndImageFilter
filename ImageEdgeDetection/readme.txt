@@ -35,5 +35,6 @@ Added RainbowTest methods
 Corrected RainbowFilter method for 100% code coverage
 Added exceptions test for RainbowFilter in ImageFiltersTest
 Added exceptions test for CopyToSquare method in EdgeFiltersTest
-Added test to check the Matrix for Laplacian3x3
-For Laplacian3x3Filter compare an original image after it has been filtered from another software.
+Added test to check the Matrix for Laplacian3x3, Sorbel3x3Vertical
+For Laplacian3x3Filter compare an original image after it has been filtered from another software (https://www.wolframalpha.com).
+Added test for ApplyGreyScale()

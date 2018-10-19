@@ -59,6 +59,22 @@ namespace ImageEdgeDetectionTest
         }
         /*
         * @author: daniel
+        */
+        [TestMethod]
+        public void Sobel3x3Vertical_SobelMatrixIsCorrect_ReturnsMatrixDouble()
+        {
+            // Arrange
+            var expectedSobel3X3VerticalMatrix = new double[,]
+            { {  1,  2,  1, },
+                {  0,  0,  0, },
+                { -1, -2, -1, }, };
+            // Act
+            var result = Matrix.Sobel3x3Vertical;
+            // Assert
+            CollectionAssert.AreEqual(expectedSobel3X3VerticalMatrix, result);
+        }
+        /*
+        * @author: daniel
         **/
         [TestMethod]
         public void Laplacian3x3Filter_CompareBitmapSize_ReturnsBitmapSizeAfterTransformation()
