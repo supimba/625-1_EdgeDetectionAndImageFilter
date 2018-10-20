@@ -40,7 +40,7 @@ namespace ImageEdgeDetectionTest
             Bitmap sourceBitmap = null;
             // Act
             var result = EdgeFilters.CopyToSquareCanvas(sourceBitmap,-20);
-            Assert.IsNull(sourceBitmap);
+            
         }
         /*
          * @author: daniel
@@ -126,7 +126,6 @@ namespace ImageEdgeDetectionTest
             Bitmap sourceBitmap = null;
             // Act
             var result = EdgeFilters.ConvolutionFilter(sourceBitmap, Matrix.Laplacian3x3, new double[1,0] , 0, 0);
-            Assert.IsNull(result);
         }
         /*
          * @author: daniel
@@ -136,9 +135,7 @@ namespace ImageEdgeDetectionTest
         public void ApplyGreyScale_ByteArrayOutOfBounds_ReturnsIndexOutOfRangeException()
         {
             byte[] byteArray1 = new byte[1];
-            byte[] byteArray2 = new byte[2];
             EdgeFilters.ApplyGreyScale(byteArray1); 
-            EdgeFilters.ApplyGreyScale(byteArray2);
         }
 
         /* @author : Alicia
